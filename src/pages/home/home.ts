@@ -48,4 +48,7 @@ export class HomePage {
   goToArchivePage() {
     this.navCtrl.push(ArchivedTodosPage);
   }
+  archiveTodo(todoIndex) {
+   this.todoServiceProvider.archivedTodo(todoIndex);
+  }
 }

@@ -59,4 +59,34 @@ export class HomePage {
   archiveTodo(todoIndex) {
     this.todoServiceProvider.archivedTodo(todoIndex);
   }
+  editTodoAlert(todoIndex) {
+    let editTodoAlert = this.alertCtrl.create({
+      title: "Edit todo",
+      message: "Edit your todo",
+      inputs: [{
+        type: "text",
+        name: "editTodoInput",
+        value: this.todos[todoIndex]
+      }],
+      buttons: [{
+        text: "Cancel"
+      },
+      {
+        text: "Edit Todo",
+        handler: (inputData) => {
+          let todoText;
+          todoText = inputData.editTodoInput;
+          this.todoServiceProvider.editTodo(todoText, todoIndex);
+          editTodoAlert.onDidDismiss(() => {
+            let editTodoToast = this.toastController.create({
+              message: "Todo is edited",
+              duration: 2000
+            });
+            editTodoToast.present();
+          });
+        }
+      }]
+    });
+    editTodoAlert.present();
+  }
 }

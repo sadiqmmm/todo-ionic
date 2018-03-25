@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, reorderArray } from 'ionic-angular';
+import { ArchivedTodosPage } from './../archived-todos/archived-todos';
 
 @Component({
   selector: 'page-home',
@@ -8,6 +9,7 @@ import { NavController, AlertController, reorderArray } from 'ionic-angular';
 export class HomePage {
   public todos = [];
   public reorderIsEnabled = true;
+  public archivedTodosPage = ArchivedTodosPage;
 
   constructor(public navCtrl: NavController, private alertCtrl: AlertController) {
 
@@ -39,5 +41,8 @@ export class HomePage {
   }
   itemReordered($event) {
     reorderArray(this.todos, $event);
+  }
+  goToArchivePage() {
+    this.navCtrl.push(ArchivedTodosPage);
   }
 }

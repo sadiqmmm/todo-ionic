@@ -50,5 +50,5 @@ export class HomePage {
   }
   archiveTodo(todoIndex) {
    this.todoServiceProvider.archivedTodo(todoIndex);
-  }
+  }  
 }

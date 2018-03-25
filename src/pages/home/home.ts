@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, reorderArray } from 'ionic-angular';
 import { ArchivedTodosPage } from './../archived-todos/archived-todos';
+import { TodoServiceProvider } from './../../providers/todo-service/todo-service';
 
 @Component({
   selector: 'page-home',
@@ -11,8 +12,10 @@ export class HomePage {
   public reorderIsEnabled = true;
   public archivedTodosPage = ArchivedTodosPage;
 
-  constructor(public navCtrl: NavController, private alertCtrl: AlertController) {
-
+  constructor(public navCtrl: NavController,
+    private alertCtrl: AlertController,
+    private todoServiceProvider: TodoServiceProvider) {
+      this.todos = this.todoServiceProvider.getTodo();
   }
   openTodoAlert() {
     let addTodoAlert = this.alertCtrl.create({
@@ -30,7 +33,7 @@ export class HomePage {
         handler: (inputData) => {
           let todoText;
           todoText = inputData.addTodoInput;
-          this.todos.push(todoText);
+          this.todoServiceProvider.addTodo(todoText);
         }
       }]
     });
